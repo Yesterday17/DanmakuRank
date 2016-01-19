@@ -33,6 +33,11 @@
     <Reference Include="BilibiliDM_PluginFramework">
       <HintPath>..\..\DanmakuSOng\BilibiliDM_PluginFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Bililive_dm">
+      <HintPath>..\..\..\..\弹幕姬\Plugins\Bililive_dm.exe</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -53,9 +58,20 @@
     <Compile Include="Count.Designer.cs">
       <DependentUpon>Count.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="资料\rawData.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y C:\Users\昨日的十七号\Documents\"Visual Studio 2015"\Projects\DanmakuRank\DanmakuRank\bin\Debug\DanmakuRank.dll C:\Users\昨日的十七号\Documents\弹幕姬\Plugins</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

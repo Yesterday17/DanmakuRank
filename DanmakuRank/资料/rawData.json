@@ -1,0 +1,133 @@
+﻿//时间戳工具：http://timestamp.phpddt.com/
+//Javascript在线格式化工具：http://www.css88.com/tool/js_beautify/
+//弹幕文件解读：http://zhidao.baidu.com/link?url=SS44RjlcfYmvcw8Sf66_sXEErOs90USOsLTu4bCeTyO0isBLKHNfr0TmJo_CeibYieaL2tFpxOWgLpR_sDZQyTrggRk1PcbI0OGX7L_t-kq
+//本地弹幕引擎(C++)：https://github.com/AncientLysine/BiliLocal
+//烈焰弹幕使(java)：https://github.com/Bilibili/DanmakuFlameMaster
+
+{
+  {
+    "info": [
+      [ 0, 1, 25, 16777215, 1453042334, "1453041124", 0, "56b745f6", 0 ], //[弹幕出现时间(单位s)(int),弹幕模式(int),字号(int),弹幕颜色(Hex转Dec)(int),时间戳(int),时间戳(string)
+      "Test", //弹幕内容(string),
+      [ 5756570, "某昨", 1, 0 ], //[用户ID(int),用户昵称(string),是否房管(bool),是否VIP(bool)],
+      [ ], //[],
+      [ 5, ">100000" ], //[用户等级(int),用户排名(string)],
+      [ ] //[]
+    ], //],
+    "cmd": "DANMU_MSG",
+    "roomid": 28525
+  },
+  {
+    "info": [
+      [ 0, 1, 25, 16777215, 1453043393, "1453043280", 0, "688aaa61", 0 ],
+      "求弹幕 在测试",
+      [ 8904170, "卖切糕的某昨", 0, 0 ],
+      [ ],
+      [ 0, ">100000" ],
+      [ ]
+    ],
+    "cmd": "DANMU_MSG",
+    "roomid": 28525
+  },
+  //赠送 我宣你
+  {
+    "cmd": "SEND_GIFT",
+    "data": {
+      "giftName": "我宣你",
+      "num": 1,
+      "uname": "卖切糕的某昨",
+      "rcost": 346,
+      "uid": 8904170,
+      "top_list": [ ],
+      "timestamp": 1453043532,
+      "giftId": 11,
+      "giftType": 2,
+      "action": "赠送",
+      "super": 0,
+      "price": 500,
+      "rnd": "1453043280",
+      "newMedal": 0,
+      "medal": false,
+      "title": false,
+      "starRank": 2
+    },
+    "roomid": 28525
+  },
+  //喂食辣条的激烈反应
+  {
+    "cmd": "SEND_GIFT",
+    "data": {
+      "giftName": "辣条",
+      "num": 1,
+      "uname": "卖切糕的某昨",
+      "rcost": 347,
+      "uid": 8904170,
+      "top_list": [
+        {
+          "uid": 3795463,
+          "uname": "某柯司机大队长",
+          "coin": 9900
+        },
+        {
+          "uid": 7185202,
+          "uname": "喔喔管家",
+          "coin": 300
+        },
+        {
+          "uid": 8904170,
+          "uname": "卖切糕的某昨",
+          "coin": 100
+        }
+      ],
+      "timestamp": 1453044430,
+      "giftId": 1,
+      "giftType": 0,
+      "action": "喂食",
+      "super": 0,
+      "price": 100,
+      "rnd": "1453043280",
+      "newMedal": 0,
+      "medal": -1,
+      "title": ""
+    },
+    "roomid": 28525
+  },
+  //B坷垃
+  {
+    "cmd": "SEND_GIFT",
+    "data": {
+      "giftName": "B坷垃",
+      "num": 1,
+      "uname": "卖切糕的某昨",
+      "rcost": 446,
+      "uid": 8904170,
+      "top_list": [
+        {
+          "uid": 8904170,
+          "uname": "卖切糕的某昨",
+          "coin": 10000
+        },
+        {
+          "uid": 3795463,
+          "uname": "某柯司机大队长",
+          "coin": 9900
+        },
+        {
+          "uid": 7185202,
+          "uname": "喔喔管家",
+          "coin": 300
+        }
+      ],
+      "timestamp": 1453044833,
+      "giftId": 3,
+      "giftType": 0,
+      "action": "赠送",
+      "super": 1,
+      "price": 9900,
+      "rnd": "1453043280",
+      "newMedal": 0,
+      "medal": -1
+    },
+    "roomid": 28525
+  }
+}
