@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Xml;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace DanmakuRank
 {
+    [Serializable()]
     public class Data
     {
         public class Person
@@ -42,19 +48,22 @@ namespace DanmakuRank
 
             public Person(string rawData)
             {
-                this.name = "";
-                this.id = 0;
-                this.id_s = "";
-                this.isAdmin = false;
-                this.isVip = false;
-                this.level = -1;
-                this.rank = "";
+                JObject jo = JObject.Parse(rawData);
+
+                this.name = jo["info"][2][1].ToString();
+                this.id = Convert.ToInt32(jo["info"][2][0]);
+                this.id_s = jo["info"][2][0].ToString();
+                this.isAdmin = Convert.ToBoolean(jo["info"][2][2]);
+                this.isVip = Convert.ToBoolean(jo["info"][2][3]);
+                this.level = Convert.ToInt32(jo["info"][4][0]);
+                this.rank = jo["info"][4][1].ToString();
 
                 this.danmaku = new List<BilibiliDM_PluginFramework.DanmakuModel>();
             }
 
             public Person(BilibiliDM_PluginFramework.DanmakuModel d)
             {
+                //已抛弃= =
                 this.name = d.CommentUser;
                 this.id = Convert.ToInt32(getJson("\",[", ",\"", d.RawData));
                 this.id_s = id.ToString();
@@ -112,8 +121,14 @@ namespace DanmakuRank
 
             public string Rank
             {
-                get{ return this.rank; }
+                get { return this.rank; }
                 set { this.rank = value; }
+            }
+
+            public List<BilibiliDM_PluginFramework.DanmakuModel>Danmaku
+            {
+                get { return danmaku; }
+                set { danmaku = value; }
             }
 
             private string name;
@@ -133,7 +148,7 @@ namespace DanmakuRank
 
             public int getDanmakuNum()
             {
-                return danmaku.Count(); 
+                return danmaku.Count();
             }
 
             /// <summary>
@@ -146,7 +161,7 @@ namespace DanmakuRank
             private string getJson(string key, string key_end, string json)
             {
                 string tmp = json.Substring(json.IndexOf(key) + key.Length);
-                string ans = tmp.Substring(0, tmp.IndexOf(key_end)- key_end.Length + 2);
+                string ans = tmp.Substring(0, tmp.IndexOf(key_end) - key_end.Length + 2);
                 return ans;
             }
 
@@ -173,7 +188,7 @@ namespace DanmakuRank
             //dt.Find((Person y)=>y.Name==u_name);
             //return y;
             return dt.Find(
-                delegate(Person y)
+                delegate (Person y)
                 {
                     return y.Name == u_name;
                 }
@@ -192,13 +207,35 @@ namespace DanmakuRank
 
         public void editByPerson(Person old, Person _new)
         {
-            Person f = dt.Find((Person y)=>y==old);
+            Person f = dt.Find((Person y) => y == old);
 
         }
 
         public object getType()
         {
             return dt.GetType();
+        }
+
+        public void Save(string File)
+        {
+            XmlDocument xd = new XmlDocument();
+            using (StringWriter sw = new StringWriter())
+            {
+                XmlSerializer xz = new XmlSerializer(dt.GetType());
+                xz.Serialize(sw, dt);
+                xd.LoadXml(sw.ToString());
+                xd.Save(File);
+            }
+        }
+
+        public void Load(string File)
+        {
+            if (!System.IO.File.Exists(File)) Save(File);
+            using (XmlReader sr = XmlReader.Create(File))
+            {
+                XmlSerializer xz = new XmlSerializer(dt.GetType());
+                dt = (List<Person>)xz.Deserialize(sr);
+            }
         }
 
     }
